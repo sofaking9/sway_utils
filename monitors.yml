@@ -4,7 +4,7 @@ Layouts:
       name: 'DELL U3824DW'
       description: 'UltraWide Monitor'
       short_dsr: "MONITOR_MAIN"
-      sn: 'BY3LZR3'
+      sn: '<SN>'
       primary: true
       mode:
         resolution: '3840x1600'
@@ -19,7 +19,7 @@ Layouts:
       name: 'DELL U2419H'
       description: 'Secondary monitor'
       short_dsr: "MONITOR_SECONDARY"
-      sn: 'BT47P83'
+      sn: '<SN>'
       primary: false
       mode:
         resolution: '1920x1080'
@@ -50,7 +50,7 @@ Layouts:
       name: 'DELL U3223QE'
       description: 'UltraSharp 32inch'
       short_dsr: "MONITOR_MAIN"
-      sn: 'JM07GH3'
+      sn: '<SN>'
       primary: true
       mode:
         resolution: '3840x2160'
@@ -65,7 +65,7 @@ Layouts:
       name: 'DELL U2415'
       description: 'Vertical monitor'
       short_dsr: "MONITOR_SECONDARY"
-      sn: '7MT0191S2G0U'
+      sn: '<SN>'
       primary: false
       mode:
         resolution: '1920x1200'
