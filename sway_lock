@@ -1,0 +1,19 @@
+#!/bin/bash
+
+LOCK=$HOME/Pictures/Icon/heart_locker_icon.png
+IMAGE=/tmp/screen.png
+LOCKARGS=""
+ 
+# All options are here: http://www.imagemagick.org/Usage/blur/#blur_args
+
+for OUTPUT in `swaymsg -t get_outputs | jq -r '.[] | select(.active == true) | .name'`
+do
+    IMAGE=/tmp/$OUTPUT-lock.png
+    grim -o $OUTPUT $IMAGE
+    convert $IMAGE -filter Gaussian -resize 50% -define filter:sigma=2.5 -resize 200% $IMAGE
+    composite -gravity center $LOCK $IMAGE $IMAGE
+    LOCKARGS="${LOCKARGS} --image ${OUTPUT}:${IMAGE}"
+    IMAGES="${IMAGES} ${IMAGE}"
+done
+swaylock --text-color=ffffff00 --inside-color=ffffff1c --ring-color=ffffff3e --line-color=ffffff00 --key-hl-color=00000080 --ring-ver-color=00000000 --inside-ver-color=0000001c --ring-wrong-color=00000055 --inside-wrong-color=0000001c  $LOCKARGS
+rm $IMAGES

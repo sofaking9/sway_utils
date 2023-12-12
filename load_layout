@@ -1,0 +1,62 @@
+#! /bin/python3
+import os
+import subprocess
+import re
+import yaml
+
+def main():
+    command = "$(swaymsg -p -t get_outputs | grep 'Output' | awk -F\"'\" '{ printf \"%s\n\", $2 }')"
+    command = "swaymsg -p -t get_outputs | grep 'Output'"
+    try:
+        result = subprocess.check_output(command, shell=True, executable="/bin/bash")
+    except subprocess.CalledProcessError as cpe:
+        print(cpe)
+        raise cpe
+
+    result = result.decode()
+    monitor_info = re.findall("'(.*?)'", result)
+
+    serial_numbers = []
+    for monitor in monitor_info:
+        serial_numbers.append(monitor.split()[-1])
+
+    result = result.splitlines()
+    display_ports = []
+    for dp in result:
+        display_ports.append(dp.split()[1])
+
+    current_layout = {serial_numbers[i]: display_ports[i] for i in range(len(serial_numbers))}
+
+    xdg_config_home = os.environ["XDG_CONFIG_HOME"]
+    layout_path = f"{xdg_config_home}/monitors.yml"
+    with open(layout_path) as file:
+        config = yaml.safe_load(file)
+
+    monitor_layout = "Not found"
+    monitor_in_conf = False
+    for layout in config['Layouts']:
+        for idx, conf in enumerate(config['Layouts'][layout]):
+            if not conf['sn'] in serial_numbers:
+                monitor_in_conf = False
+                break
+            monitor_in_conf = True
+            config['Layouts'][layout][idx]['port'] = current_layout[conf['sn']]
+        if monitor_in_conf:
+            monitor_layout = layout
+            break
+
+    if not monitor_in_conf:
+        print(f'Monitor layout not found in {layout_path}')
+        return
+
+    for monitor in config['Layouts'][monitor_layout]:
+        swaystr = f'sway output {monitor["port"]} \
+                position {monitor["position"]["x"]} {monitor["position"]["y"]} \
+                res {monitor["mode"]["resolution"]}@{monitor["mode"]["refresh_rate"]} \
+                transform {monitor["transform"]["rotation"]}'
+        output = subprocess.check_output(swaystr, shell=True, executable='/bin/bash')
+        print(f'{monitor["name"]}:{monitor["port"]}\t{output}')
+
+
+if __name__ == "__main__":
+    main()

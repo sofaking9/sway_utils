@@ -1,0 +1,93 @@
+Layouts:
+  Kontor:
+    -
+      name: 'DELL U3824DW'
+      description: 'UltraWide Monitor'
+      short_dsr: "MONITOR_MAIN"
+      sn: 'BY3LZR3'
+      primary: true
+      mode:
+        resolution: '3840x1600'
+        refresh_rate: '29.998Hz'
+      position:
+        x: 1080
+        y: 134
+      transform:
+        rotation: 0
+        flipped: false
+    - 
+      name: 'DELL U2419H'
+      description: 'Secondary monitor'
+      short_dsr: "MONITOR_SECONDARY"
+      sn: 'BT47P83'
+      primary: false
+      mode:
+        resolution: '1920x1080'
+        refresh_rate: '60.000Hz'
+      position:
+        x: 0
+        y: 0
+      transform:
+        rotation: 270
+        flipped: false
+    -
+      name: 'Unknown 0x0AFC'
+      description: 'Laptop monitor'
+      short_dsr: "MONITOR_LAPTOP"
+      sn: '0x00000000'
+      primary: false
+      mode:
+        resolution: '1920x1080'
+        refresh_rate: '60.001636505126953Hz'
+      position:
+        x: 4920
+        y: 650
+      transform:
+        rotation: 0
+        flipped: false
+  Hjemmekontor:
+    -
+      name: 'DELL U3223QE'
+      description: 'UltraSharp 32inch'
+      short_dsr: "MONITOR_MAIN"
+      sn: 'JM07GH3'
+      primary: true
+      mode:
+        resolution: '3840x2160'
+        refresh_rate: '59.997Hz'
+      position:
+        x: 1200
+        y: 0
+      transform:
+        rotation: 0
+        flipped: false
+    - 
+      name: 'DELL U2415'
+      description: 'Vertical monitor'
+      short_dsr: "MONITOR_SECONDARY"
+      sn: '7MT0191S2G0U'
+      primary: false
+      mode:
+        resolution: '1920x1200'
+        refresh_rate: '59.950Hz'
+      position:
+        x: 0
+        y: 120
+      transform:
+        rotation: 270
+        flipped: false
+    -
+      name: 'Unknown 0x0AFC'
+      description: 'Laptop monitor'
+      short_dsr: "MONITOR_LAPTOP"
+      sn: '0x00000000'
+      primary: false
+      mode:
+        resolution: '1920x1080'
+        refresh_rate: '60.001636505126953Hz'
+      position:
+        x: 5040
+        y: 1080
+      transform:
+        rotation: 0
+        flipped: false
